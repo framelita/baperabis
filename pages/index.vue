@@ -1,38 +1,25 @@
-<template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        baperabis
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    Header
+    main
+      .login
+        input(
+          type="text"
+          placeholder="Masukan kode game"
+        )
+        p atau
+        button.button(
+          type="button"
+          @click="createNewGame"
+        ) Buat game baru
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Header from '~/components/Header.vue'
 
 export default {
   components: {
-    Logo,
+    Header,
   },
 }
 </script>
@@ -45,32 +32,19 @@ export default {
 */
 .container {
   margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  padding: 0 30px;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.login {
+  margin: 30px 0;
+  max-width: 300px;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+input[type='text'] {
+  @apply shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight;
 }
 
-.links {
-  padding-top: 15px;
+.button {
+  @apply bg-blue-500 text-white rounded font-bold py-2 px-4 rounded;
 }
 </style>
