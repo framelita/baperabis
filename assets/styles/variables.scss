@@ -1,0 +1,18 @@
+/* --- fonts --- */
+$baseFont: 'Roboto', arial, helvetica, sans-serif;
+
+$dark: #101526;
+$light: #fff;
+
+$pink: #F27289;
+$blue1: #26488C;
+$blue2: #4184BF;
+$blue3: #7EDDF2;
+$salmon: #7EDDF2;
+
+$grey: #999;
+$lightGrey: #ccc;
+$greyHover: darken($grey, 5%);
+
+$primaryColor: $blue2;
+$primaryColorHover: darken($primaryColor, 9%);

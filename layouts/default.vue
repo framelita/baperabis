@@ -1,13 +1,23 @@
-<template>
-  <div>
-    <nuxt />
-  </div>
+<template lang="pug">
+  div
+    Header
+    nuxt
 </template>
+
+<script>
+import Header from '~/components/Header.vue';
+
+export default {
+  components: {
+    Header,
+  },
+};
+</script>
 
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

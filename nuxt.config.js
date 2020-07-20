@@ -21,13 +21,17 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap' }
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap',
+      },
     ],
   },
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['normalize.css/normalize.css', './assets/styles/globals.scss'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -43,7 +47,16 @@ export default {
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/style-resources',
   ],
+
+  gtm: {
+    id: process.env.GTM_TAG,
+  },
+
+  styleResources: {
+    scss: ['./assets/styles/variables.scss'],
+  },
   /*
    ** Nuxt.js modules
    */
@@ -62,4 +75,4 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
-}
+};

@@ -1,6 +1,5 @@
 <template lang="pug">
   .container
-    Header
     main
       .login
         input(
@@ -8,20 +7,28 @@
           placeholder="Masukan kode game"
         )
         p atau
-        button.button(
+        Button(
           type="button"
           @click="createNewGame"
+          isPrimary=true
+          isNuxt=true
+          to="/game"
         ) Buat game baru
 </template>
 
 <script>
-import Header from '~/components/Header.vue'
+import Button from '~/components/UI/Button.vue';
 
 export default {
   components: {
-    Header,
+    Button,
   },
-}
+  methods: {
+    createNewGame() {
+      console.log('create');
+    },
+  },
+};
 </script>
 
 <style>
@@ -33,18 +40,5 @@ export default {
 .container {
   margin: 0 auto;
   padding: 0 30px;
-}
-
-.login {
-  margin: 30px 0;
-  max-width: 300px;
-}
-
-input[type='text'] {
-  @apply shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight;
-}
-
-.button {
-  @apply bg-blue-500 text-white rounded font-bold py-2 px-4 rounded;
 }
 </style>
