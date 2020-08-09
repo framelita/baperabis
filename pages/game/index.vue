@@ -6,13 +6,14 @@
     .game__play
       Card(
         isQuestion=true
-        content="Pada tahun 2020, Raja Majapahit ter-isekai menjadi seorang ________"
+        :content="selectedQuestion.text"
       )
       .game__buttons
         Button(
           type="button"
           isPrimary=true
           isGhost=true
+          @click="getQuestion"
         ) Ganti kartu
         Button(
           type="button"
@@ -24,10 +25,50 @@
 import Button from '~/components/UI/Button.vue';
 import Card from '~/components/game/Card.vue';
 
+import Questions from '~/assets/data/questions.json';
+
 export default {
   components: {
     Button,
     Card,
+  },
+  data() {
+    return {
+      questions: Questions,
+      selectedQuestion: {},
+    };
+  },
+  mounted() {
+    this.getQuestion();
+  },
+  methods: {
+    setAllUnused() {
+      this.questions.forEach((q) => {
+        q.hasBeenUsed = false;
+      });
+    },
+    setQuestionUsed(id) {
+      const usedQuestion = this.questions.find((q) => q.id === id);
+      if (usedQuestion) usedQuestion.hasBeenUsed = true;
+    },
+    getQuestion() {
+      const unusedQuestions = this.questions.filter((q) => !q.hasBeenUsed);
+      if (unusedQuestions.length === 0) {
+        this.setAllUnused();
+        this.getQuestion();
+        return;
+      }
+      const totalQuestions = unusedQuestions.length;
+
+      const max = totalQuestions - 1;
+      const min = 0;
+      const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      const selectedQuestion = unusedQuestions[rand];
+      this.setQuestionUsed(selectedQuestion.id);
+
+      this.$set(this, 'selectedQuestion', selectedQuestion);
+    },
   },
 };
 </script>
