@@ -1,82 +1,62 @@
 <template lang="pug">
   .container
     .game__instruction
-      p.game__title Kamu bosnya!
-      p Baca kartu ini dan tekan Mulai. Setelah semua memainkan kartu, pilih kartu favoritmu!
-    .game__play
-      Card(
-        isQuestion=true
-        :content="selectedQuestion.text"
-      )
-      .game__buttons
-        Button(
-          type="button"
-          isPrimary=true
-          isGhost=true
-          @click="getQuestion"
-        ) Ganti kartu
-        Button(
-          type="button"
-          isPrimary=true
-        ) Mulai
+      p.game__title(v-html="title")
+      p(v-html="text")
+    QuestionOption(
+      v-if="isBoss && isQuestionTurn"
+    )
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 import Button from '~/components/UI/Button.vue';
-import Card from '~/components/game/Card.vue';
+import QuestionOption from '~/components/game/QuestionOption.vue';
 
 export default {
   components: {
     Button,
-    Card,
-  },
-  data() {
-    return {
-      questions: [],
-      selectedQuestion: {},
-    };
+    QuestionOption,
   },
   computed: {
-    ...mapGetters(['getQuestions']),
+    isBoss() {
+      return true;
+    },
+    isQuestionTurn() {
+      return true;
+    },
+    title() {
+      if (this.isBoss && this.isQuestionTurn) {
+        return 'Kamu bosnya!';
+      } else if (this.isQuestionTurn) {
+        return 'Giliran bos';
+      }
+      return 'Pilih kartu';
+    },
+    text() {
+      if (this.isBoss && this.isQuestionTurn) {
+        return 'Baca kartu ini dan tekan Mulai. Setelah semua memainkan kartu, pilih kartu favoritmu.';
+      } else if (this.isQuestionTurn) {
+        return 'Tunggu bos memilih dan membaca kartu.';
+      }
+      return '';
+    },
   },
   mounted() {
-    this.getQuestion();
+    const { id } = this.$route;
+    // if there is no id,
+    // create one
+    if (id) {
+      this.getGameRoom(id);
+    } else {
+      this.generateGameRoom();
+    }
   },
   methods: {
-    ...mapMutations(['useQuestion']),
-    setAllUnskipped() {
-      this.questions.forEach((q) => {
-        q.hasBeenSkipped = false;
-      });
-    },
-    setQuestionSkipped(id) {
-      const skippedQuestion = this.questions.find((q) => q.id === id);
-      if (skippedQuestion) skippedQuestion.hasBeenSkipped = true;
-    },
-    getQuestion() {
-      // when a user choose to skip this question,
-      // remember it for this round so that they won't keep seeing same question
-      this.questions = this.getQuestions;
-      const unskippedQuestions = this.questions.filter(
-        (q) => !q.hasBeenSkipped
-      );
-      if (unskippedQuestions.length === 0) {
-        this.setAllUnskipped();
-        this.getQuestion();
-        return;
-      }
-      const totalQuestions = unskippedQuestions.length;
-
-      const max = totalQuestions - 1;
-      const min = 0;
-      const rand = Math.floor(Math.random() * (max - min + 1)) + min;
-
-      const selectedQuestion = unskippedQuestions[rand];
-      this.setQuestionSkipped(selectedQuestion.id);
-
-      this.$set(this, 'selectedQuestion', selectedQuestion);
+    ...mapActions(['getGameRoom']),
+    generateGameRoom() {
+      console.log('test');
     },
   },
 };
