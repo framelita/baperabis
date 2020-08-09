@@ -1,6 +1,6 @@
 <template lang="pug">
   .container
-    .game__direction
+    .game__instruction
       p.game__title Kamu bosnya!
       p Baca kartu ini dan tekan Mulai. Setelah semua memainkan kartu, pilih kartu favoritmu!
     .game__play
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss">
-.game__direction {
+.game__instruction {
   width: 100%;
   max-width: 300px;
 }
