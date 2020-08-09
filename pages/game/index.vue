@@ -56,6 +56,8 @@ export default {
       if (skippedQuestion) skippedQuestion.hasBeenSkipped = true;
     },
     getQuestion() {
+      // when a user choose to skip this question,
+      // remember it for this round so that they won't keep seeing same question
       this.questions = this.getQuestions;
       const unskippedQuestions = this.questions.filter(
         (q) => !q.hasBeenSkipped

@@ -13,6 +13,7 @@ export const mutations = {
 
 export const getters = {
   getQuestions(state) {
+    // make sure to only return question that hasn't been played
     const unusedQuestions = state.questions.filter((q) => !q.hasBeenUsed);
     if (unusedQuestions.length === 0) {
       state.questions.forEach((q) => {
