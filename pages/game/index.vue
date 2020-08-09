@@ -22,10 +22,10 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+
 import Button from '~/components/UI/Button.vue';
 import Card from '~/components/game/Card.vue';
-
-import Questions from '~/assets/data/questions.json';
 
 export default {
   components: {
@@ -34,38 +34,45 @@ export default {
   },
   data() {
     return {
-      questions: Questions,
+      questions: [],
       selectedQuestion: {},
     };
+  },
+  computed: {
+    ...mapGetters(['getQuestions']),
   },
   mounted() {
     this.getQuestion();
   },
   methods: {
-    setAllUnused() {
+    ...mapMutations(['useQuestion']),
+    setAllUnskipped() {
       this.questions.forEach((q) => {
-        q.hasBeenUsed = false;
+        q.hasBeenSkipped = false;
       });
     },
-    setQuestionUsed(id) {
-      const usedQuestion = this.questions.find((q) => q.id === id);
-      if (usedQuestion) usedQuestion.hasBeenUsed = true;
+    setQuestionSkipped(id) {
+      const skippedQuestion = this.questions.find((q) => q.id === id);
+      if (skippedQuestion) skippedQuestion.hasBeenSkipped = true;
     },
     getQuestion() {
-      const unusedQuestions = this.questions.filter((q) => !q.hasBeenUsed);
-      if (unusedQuestions.length === 0) {
-        this.setAllUnused();
+      this.questions = this.getQuestions;
+      const unskippedQuestions = this.questions.filter(
+        (q) => !q.hasBeenSkipped
+      );
+      if (unskippedQuestions.length === 0) {
+        this.setAllUnskipped();
         this.getQuestion();
         return;
       }
-      const totalQuestions = unusedQuestions.length;
+      const totalQuestions = unskippedQuestions.length;
 
       const max = totalQuestions - 1;
       const min = 0;
       const rand = Math.floor(Math.random() * (max - min + 1)) + min;
 
-      const selectedQuestion = unusedQuestions[rand];
-      this.setQuestionUsed(selectedQuestion.id);
+      const selectedQuestion = unskippedQuestions[rand];
+      this.setQuestionSkipped(selectedQuestion.id);
 
       this.$set(this, 'selectedQuestion', selectedQuestion);
     },
