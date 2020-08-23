@@ -115,6 +115,7 @@ export default {
   &:disabled {
     background: $lightGrey;
     color: $grey;
+    border-color: $lightGrey;
   }
 }
 

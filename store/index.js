@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import Questions from '~/assets/data/questions.json';
 import Game from '~/assets/data/game.json';
 
@@ -41,7 +42,7 @@ export const mutations = {
   updateGameSettings(state, game) {
     const { gameId, players } = game;
     state.gameId = gameId;
-    state.players = players;
+    Vue.set(state, 'players', players);
   },
 };
 

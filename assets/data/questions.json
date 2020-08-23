@@ -1,14 +1,17 @@
 [
   {
     "id": 0,
-    "text": "Pada tahun 2020, Raja Majapahit ter-isekai menjadi seorang ________"
+    "text": "Pada tahun 2020, Raja Majapahit ter-isekai menjadi seorang ________",
+    "answers": 1
   },
   {
     "id": 1,
-    "text": "Pepatah mengatakan, surga ada di ________"
+    "text": "Pepatah mengatakan, surga ada di ________",
+    "answers": 1
   },
   {
     "id": 2,
-    "text": "Aku ngga naik kelas dua kali karena ________"
+    "text": "Aku ngga naik kelas dua kali karena ________",
+    "answers": 1
   }
 ]

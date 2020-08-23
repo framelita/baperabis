@@ -5,6 +5,14 @@
       p(v-html="text")
     QuestionOption(
       v-if="isBoss && isQuestionTurn"
+      @selected="sendQuestion"
+    )
+    AnswerOption(
+      v-if="!isBoss && isAnswerTurn"
+      :question="selectedQuestion"
+    )
+    QuestionAnswerOption(
+      v-if="isQuestionAnswerTurn"
     )
 </template>
 
@@ -13,18 +21,35 @@ import { mapActions } from 'vuex';
 
 import Button from '~/components/UI/Button.vue';
 import QuestionOption from '~/components/game/QuestionOption.vue';
+import AnswerOption from '~/components/game/AnswerOption.vue';
+import QuestionAnswerOption from '~/components/game/QuestionAnswerOption.vue';
 
 export default {
   components: {
     Button,
     QuestionOption,
+    AnswerOption,
+    QuestionAnswerOption,
+  },
+  data() {
+    return {
+      selectedQuestion: {},
+      step: 1,
+      isBoss: true,
+    };
   },
   computed: {
-    isBoss() {
-      return true;
-    },
+    // isBoss() {
+    //   return true;
+    // },
     isQuestionTurn() {
-      return true;
+      return this.step === 1;
+    },
+    isAnswerTurn() {
+      return this.step === 2;
+    },
+    isQuestionAnswerTurn() {
+      return this.step === 3;
     },
     title() {
       if (this.isBoss && this.isQuestionTurn) {
@@ -32,6 +57,13 @@ export default {
       } else if (this.isQuestionTurn) {
         return 'Giliran bos';
       }
+
+      if (this.isBoss && this.isAnswerTurn) {
+        return 'Giliran anak buah';
+      } else if (this.isAnswerTurn) {
+        return 'Pilih kartu';
+      }
+
       return 'Pilih kartu';
     },
     text() {
@@ -40,6 +72,13 @@ export default {
       } else if (this.isQuestionTurn) {
         return 'Tunggu bos memilih dan membaca kartu.';
       }
+
+      if (this.isBoss && this.isAnswerTurn) {
+        return 'Tunggu mereka memilih kartu.';
+      } else if (this.isAnswerTurn) {
+        return 'Pilih kartu yang kira-kira bos bakal suka.';
+      }
+
       return '';
     },
   },
@@ -57,6 +96,12 @@ export default {
     ...mapActions(['getGameRoom']),
     generateGameRoom() {
       console.log('test');
+    },
+    sendQuestion(question) {
+      // tell everyone the selected question
+      this.$set(this, 'selectedQuestion', question);
+      this.step = 2;
+      this.isBoss = false; // for testing
     },
   },
 };

@@ -30,6 +30,9 @@ export default {
     Button,
     GameCard,
   },
+  props: {
+    question: { type: Object, default: () => {} },
+  },
   data() {
     return {
       questions: [],

@@ -2,8 +2,83 @@
   {
     "id": 1,
     "gameId": "HELLO",
-    "players": [1],
+    "players": [
+      {
+        "id": 1,
+        "nickname": "Siska"
+      },
+      {
+        "id": 2,
+        "nickname": "Kent"
+      },
+      {
+        "id": 3,
+        "nickname": "Unknown"
+      }
+    ],
     "hostId": 1,
-    "dateCreated": "2020-08-09 19:29:00"
+    "dateCreated": "2020-08-09 19:29:00",
+    "cards": [
+      {
+        "id": 20,
+        "text": "Jawaban no 20"
+      },
+      {
+        "id": 12,
+        "text": "Jawaban no 12"
+      },
+      {
+        "id": 6,
+        "text": "Jawaban no 6"
+      },
+      {
+        "id": 45,
+        "text": "Jawaban no 45"
+      },
+      {
+        "id": 34,
+        "text": "Jawaban no 34"
+      },
+      {
+        "id": 32,
+        "text": "Jawaban no 32"
+      },
+      {
+        "id": 28,
+        "text": "Jawaban no 28"
+      },
+      {
+        "id": 9,
+        "text": "Jawaban no 9"
+      },
+      {
+        "id": 43,
+        "text": "Jawaban no 43"
+      },
+      {
+        "id": 22,
+        "text": "Jawaban no 22"
+      },
+      {
+        "id": 51,
+        "text": "Jawaban no 51"
+      },
+      {
+        "id": 27,
+        "text": "Jawaban no 27"
+      },
+      {
+        "id": 36,
+        "text": "Jawaban no 36"
+      },
+      {
+        "id": 5,
+        "text": "Jawaban no 5"
+      },
+      {
+        "id": 3,
+        "text": "Jawaban no 3"
+      }
+    ]
   }
 ]
